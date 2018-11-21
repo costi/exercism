@@ -17,10 +17,17 @@ func Square(position int) (uint64, error) {
 // Total returns the total number of grains on a chess board
 // if every square we double the number of grains
 func Total() uint64 {
-	return totalWithMax()
+	return totalWithConstant()
+	// return totalWithMax()
 	// return totalWithSum()
 	// return totalWithOr()
 	// return totalWithOrInline()
+}
+
+// https://golang.org/ref/spec#Constants
+// it would not overflow because: "implementation must: Represent integer constants with at least 256 bits."
+func totalWithConstant() uint64 {
+	return 1<<64 - 1
 }
 
 // 0 0 0 0 1 +
@@ -29,6 +36,7 @@ func Total() uint64 {
 // 0 1 0 0 0 +
 // 1 0 0 0 0 =
 // 1 1 1 1 1
+// trying to generate uint64 max by turning all bits to 1
 func totalWithMax() uint64 {
 	return ^uint64(0)
 }
